@@ -5,30 +5,28 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true,
     },
 
     email: {
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
 
     password: {
       type: String,
-      required: true,
+      required: false,
     },
 
     googleId: {
       type: String,
-      default: null,
+      unique: true,
+      sparse: true,
     },
 
-    picture: {
-      type: String,
-      default: "",
-    },
-
-    // Password reset
     resetPasswordToken: {
       type: String,
       default: null,
@@ -44,4 +42,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
