@@ -73,6 +73,28 @@ function Dashboard() {
       });
   };
 
+  // Convert the datetime-local value (user's local time) to UTC ISO
+  // before sending it to the backend/database.
+  const localDateTimeToISOString = (value) => {
+    if (!value) return null;
+
+    const date = new Date(value);
+    return date.toISOString();
+  };
+
+  // Convert a stored UTC ISO date back to the user's local time
+  // for the datetime-local input.
+  const isoToLocalDateTime = (value) => {
+    if (!value) return "";
+
+    const date = new Date(value);
+    const timezoneOffset = date.getTimezoneOffset();
+
+    return new Date(date.getTime() - timezoneOffset * 60000)
+      .toISOString()
+      .slice(0, 16);
+  };
+
   const formatDateTime = (date) => {
     if (!date) {
       return "Not set";
@@ -114,8 +136,8 @@ function Dashboard() {
       await API.post("/todos", {
         title,
         priority,
-        deadline: deadline || null,
-        reminder: reminder || null,
+        deadline: localDateTimeToISOString(deadline),
+        reminder: localDateTimeToISOString(reminder),
       });
 
       resetForm();
@@ -135,21 +157,9 @@ function Dashboard() {
     setTitle(todo.title);
     setPriority(todo.priority || "Medium");
 
-    setDeadline(
-      todo.deadline
-        ? new Date(todo.deadline)
-            .toISOString()
-            .slice(0, 16)
-        : ""
-    );
+    setDeadline(isoToLocalDateTime(todo.deadline));
 
-    setReminder(
-      todo.reminder
-        ? new Date(todo.reminder)
-            .toISOString()
-            .slice(0, 16)
-        : ""
-    );
+    setReminder(isoToLocalDateTime(todo.reminder));
 
     window.scrollTo({
       top: 0,
@@ -168,8 +178,8 @@ function Dashboard() {
       await API.put(`/todos/${editingId}`, {
         title,
         priority,
-        deadline: deadline || null,
-        reminder: reminder || null,
+        deadline: localDateTimeToISOString(deadline),
+        reminder: localDateTimeToISOString(reminder),
       });
 
       resetForm();

@@ -32,9 +32,10 @@ const startReminderJob = () => {
           continue;
         }
 
-        // Format deadline
+        // Format deadline in Indian Standard Time
         const deadlineText = todo.deadline
-          ? new Date(todo.deadline).toLocaleString("en-US", {
+          ? new Date(todo.deadline).toLocaleString("en-IN", {
+              timeZone: "Asia/Kolkata",
               month: "short",
               day: "numeric",
               year: "numeric",
@@ -44,9 +45,10 @@ const startReminderJob = () => {
             })
           : "No deadline set";
 
-        // Format reminder time
+        // Format reminder time in Indian Standard Time
         const reminderText = todo.reminder
-          ? new Date(todo.reminder).toLocaleString("en-US", {
+          ? new Date(todo.reminder).toLocaleString("en-IN", {
+              timeZone: "Asia/Kolkata",
               month: "short",
               day: "numeric",
               year: "numeric",
