@@ -1,21 +1,26 @@
 # TaskFlow
 
-TaskFlow is a full-stack MERN task management application designed to help users organize, manage, and track their daily tasks from a simple productivity workspace.
+TaskFlow is a full-stack MERN task management application designed to help users organize, manage, and track their daily tasks through a simple productivity workspace.
 
-## 🚀 Features
+## 🚀 Live Demo
+
+👉 [TaskFlow Live](https://task-flow-iota-drab.vercel.app)
+
+## ✨ Features
 
 - User registration and login
 - Google OAuth authentication
-- Secure JWT-based authentication
+- JWT-based authentication
 - Protected dashboard
 - Create, update, complete, and delete tasks
-- Task status management
-- Task reminders through email
-- Forgot password functionality
-- Secure password reset through email
-- Responsive authentication interface
+- Task priority management
+- Deadline and reminder management
+- Email task reminders
+- Search and task filtering
+- Dashboard task statistics
 - MongoDB database integration
 - REST API backend
+- Responsive user interface
 
 ## 🛠️ Tech Stack
 
@@ -34,17 +39,17 @@ TaskFlow is a full-stack MERN task management application designed to help users
 - MongoDB
 - Mongoose
 - JWT
-- bcrypt
+- bcryptjs
+- Node-Cron
 - Nodemailer
 
-### Authentication & Email
+### Authentication
 
+- JWT Authentication
 - Google OAuth
-- Brevo SMTP
-- JWT authentication
-- Password reset through email
+- bcryptjs password hashing
 
-## 📁 Project Structure
+## 🏗️ Project Structure
 
 ```text
 TaskFlow/
@@ -65,6 +70,7 @@ TaskFlow/
 │   │   ├── components/
 │   │   ├── context/
 │   │   └── pages/
+│   ├── vercel.json
 │   └── package.json
 │
 ├── .gitignore
